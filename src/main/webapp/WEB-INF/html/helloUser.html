@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/header :: headerFragment (title='Привет!', additionalCss='/resources/css/dashboard.css')"></head>
+<body>
+<nav th:replace="templates/nav :: topNav"></nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav th:replace="templates/nav :: leftNav"></nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <h1 class="h2">Страница пользователя</h1>
+            <div th:text="${user != null} ? 'Привет, ' + ${user.name}+ '!' : ''"></div>
+        </main>
+    </div>
+</div>
+<div th:insert="templates/footer :: footer" th:remove="tag"></div>
+</body>
+</html>

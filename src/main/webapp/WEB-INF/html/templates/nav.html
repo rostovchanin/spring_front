@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:fragment="topNav" class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="/logout">Выйти</a>
+        </li>
+    </ul>
+</nav>
+
+<nav th:fragment="leftNav" class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <div class="list-group">
+            <div th:if="${#request.isUserInRole('ADMIN')}" th:remove="tag">
+                <a  href="/admin" class="list-group-item list-group-item-action"  th:classappend="${#strings.contains(#httpServletRequest.requestURI, 'admin')}?active:''">Администрирование</a>
+            </div>
+            <a href="/user" class="list-group-item list-group-item-action" th:classappend="${#strings.contains(#httpServletRequest.requestURI, 'user')}?active:''">Раздел для пользователя</a>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

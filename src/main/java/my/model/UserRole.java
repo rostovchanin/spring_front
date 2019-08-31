@@ -1,8 +1,9 @@
 package my.model;
 
 
+import java.io.Serializable;
 
-public class UserRole {
+public class UserRole implements Serializable {
     private Integer id;
 
     private String roleName;

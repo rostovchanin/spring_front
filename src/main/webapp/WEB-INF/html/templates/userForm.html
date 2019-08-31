@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:fragment="userForm(isModalType)" method="POST" action="/admin/editUser"
+      th:with="formModalSuffix=${isModalType==1?'Modal':''}">
+    <div class="form-group" th:classappend="${isModalType==1}?'col-lg-8':'col-lg-4'" style="margin: 0 auto;">
+        <div class="form-group" id="inputIdDiv" th:if="${isModalType==1}">
+            <label th:for="'inputId'+${formModalSuffix}">ID</label>
+            <input type="text" class="form-control" th:id="'inputId'+${formModalSuffix}" disabled value=""/>
+            <input type="hidden" id="inputHiddenId" name="id" value="">
+        </div>
+
+        <div class="form-group">
+            <label th:for="'inputName'+${formModalSuffix}">Имя пользователя</label>
+            <input type="text" class="form-control" th:id="'inputName'+${formModalSuffix}" placeholder="Имя" name="name"
+                   value=""/>
+        </div>
+        <div class="form-group">
+            <label th:for="'selectRole'+${formModalSuffix}">Роль</label>
+            <select name="role_id" th:id="'selectRole'+${formModalSuffix}" class="form-control">
+                <option th:each="userRole : ${userRoles}" th:value="${userRole.id}"
+                        th:text="${userRole.roleName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label th:for="'inputLogin'+${formModalSuffix}">Логин</label>
+            <input type="text" class="form-control" th:id="'inputLogin'+${formModalSuffix}" placeholder="Логин"
+                   name="login" value=""/>
+        </div>
+        <div class="form-group">
+            <label th:for="'inputPassword'+${formModalSuffix}">Пароль</label>
+            <input type="password" class="form-control" th:id="'inputPassword'+${formModalSuffix}" placeholder="Пароль"
+                   name="password" value=""/>
+        </div>
+        <div class="col-md-4 m-auto" th:if="${isModalType!=1}">
+            <a href="" class="btn btn-primary btnAddUser">Сохранить</a>
+        </div>
+        <div class="modal-footer" th:if="${isModalType==1}">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            <a href="" class="btn btn-primary btnEditUser">Сохранить</a>
+        </div>
+
+    </div>
+</form>
+</body>
+</html>

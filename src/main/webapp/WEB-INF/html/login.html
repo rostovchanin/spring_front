@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/header :: headerFragment (title='Вход', additionalCss='/resources/css/signin.css')"></head>
+<body>
+<form method="POST" align="center" class="form-signin">
+    <center th:if="${param.accessDeny != null}"><font color="red">Доступ запрещен!</font></center>
+    <center th:if="${param.error != null}"><font color="red">Ошибка авторизации!</font></center>
+    <center th:if="${param.logout != null}"><font color="green">Успешный выход! Необходима авторизация!</font></center>
+
+    <h1>Авторизация</h1>
+    <label for="inputLogin" class="sr-only">Имя пользователя</label>
+    <input type="text" name="username" id="inputLogin" class="form-control" placeholder="Введите имя" required
+           autofocus/>
+    <label for="inputPassword" class="sr-only">Пароль</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Пароль" required/>
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Войти"/>
+</form>
+<div th:insert="templates/footer :: footer" th:remove="tag"></div>
+</body>
+</html>

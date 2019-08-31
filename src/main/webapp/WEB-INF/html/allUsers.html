@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/header :: headerFragment (title='Все пользователи', additionalCss='/resources/css/dashboard.css')"></head>
+<body>
+<nav th:replace="templates/nav :: topNav"></nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav th:replace="templates/nav :: leftNav"></nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <h1 class="h2">Администрирование</h1>
+            <font th:if="${param.deleteOk != null}" color="red">Пользователь удален!</font>
+            <font th:if="${param.deleteNotOk != null}" color="red">Неудача при попытке удалить пользователя!</font>
+            <font th:if="${param.updateNotOk != null}" color="red">Неудача при попытке редактировать
+                пользователя!</font>
+            <font th:if="${param.updateOk != null}" color="green">Пользователь сохранен!</font>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                       aria-controls="nav-home" aria-selected="true">Таблица пользователей</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                       aria-controls="nav-profile" aria-selected="false">Новый пользователь</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr align="center">
+                            <th>ID</th>
+                            <th>Роль</th>
+                            <th>Имя</th>
+                            <th>Пароль</th>
+                            <th>Логин</th>
+                            <th>Изменить</th>
+                        </tr>
+                        </thead>
+                        <tbody id="usersList">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
+                     th:insert="templates/userForm :: userForm (isModalType=0)"></div>
+            </div>
+        </main>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="userEditFormModal" tabindex="-1" role="dialog" aria-labelledby="userEditFormModalTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userEditFormModalTitle">Редактирование пользователя</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" th:insert="templates/userForm :: userForm (isModalType=1)">
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="templates/footer :: footer" th:remove="tag"></div>
+</body>
+</html>
